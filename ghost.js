@@ -31,13 +31,13 @@ class Ghost {
   }
 
   changeRandomDirection() {
-    this.randomTargetIndex += parseInt(Math.random() * 4);
+    this.randomTargetIndex += 1;
     this.randomTargetIndex = this.randomTargetIndex % 4;
   }
 
   isInRangeOfPacman() {
     let xDistance = Math.abs(pacman.getMapX() - this.getMapX());
-    let yDistance = Math.abs(pacman.getMapY() - this.getMayY());
+    let yDistance = Math.abs(pacman.getMapY() - this.getMapY());
 
     if (
       Math.sqrt(xDistance * xDistance + yDistance * yDistance) <= this.range
@@ -48,7 +48,7 @@ class Ghost {
   }
 
   moveProcess() {
-    if (this.isInRangeOfPacman) {
+    if (this.isInRangeOfPacman()) {
       this.target = pacman;
     } else {
       this.target = randomTargetsForGhosts[this.randomTargetIndex];
@@ -62,7 +62,7 @@ class Ghost {
     }
   }
 
-  moveBackwards() {
+  moveBackwards() {	
     switch (this.direction) {
       case DIRECTION_RIGHT:
         this.x -= this.speed;
@@ -249,3 +249,4 @@ class Ghost {
     return parseInt((this.y + 0.9999 * oneBlockSize) / oneBlockSize);
   }
 }
+	
