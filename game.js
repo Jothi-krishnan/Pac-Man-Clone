@@ -60,6 +60,7 @@ let map = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
+
 for (let i = 0; i < map.length; i++) {
   for (let j = 0; j < map[0].length; j++) {
     if (map[i][j] == 2) {
@@ -74,6 +75,12 @@ let randomTargetsForGhosts = [
   { x: (map[0].length - 2) * oneBlockSize, y: 1 * oneBlockSize },
   { x: (map[0].length - 2) * oneBlockSize, y: (map.length - 2) * oneBlockSize },
 ];
+
+// audio variables
+
+let game_start = new Audio('/assets/pacman_beginning.wav');
+let chomp = new Audio('/assets/pacman_chomp.wav');
+let pacman_death = new Audio('/assets/pacman_death.wav');
 
 let gameLoop = () => {
   draw();
@@ -101,13 +108,16 @@ let update = () => {
 };
 
 let restartGame = () => {
-  createNewPacman();
-  createGhosts();
-  lives--;
 
-  if (lives == 0) {
+  if (lives == 1) {
+    pacman_death.play();
     gameOver();
-    drawGameOver();
+    drawGameOver();;
+  }
+  else{
+    createNewPacman();
+    createGhosts();
+    lives--;
   }
 };
 
@@ -245,6 +255,8 @@ let drawWalls = () => {
 };
 
 let createNewPacman = () => {
+  game_start.play();
+
   pacman = new Pacman(
     oneBlockSize,
     oneBlockSize,

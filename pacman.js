@@ -29,6 +29,7 @@ class Pacman {
     for (let i = 0; i < map.length; i++) {
       for (let j = 0; j < map[0].length; j++) {
         if (map[i][j] == 2 && this.getMapX() == j && this.getMapY() == i) {
+          chomp.play();
           map[i][j] = 3;
           score++;
         }
